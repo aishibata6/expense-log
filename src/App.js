@@ -1,4 +1,5 @@
 import ExpensesContainer from "./components/Expenses/expensesContainer/ExpensesContainer";
+import NewExpenseContainer from "./components/NewExpense/newExpenseContainer/NewExpenseContainer";
 
 const App = () => {
   const expenses = [
@@ -23,9 +24,15 @@ const App = () => {
     },
   ];
 
+  // setting up this function, so App.js component can get data from NewExpenseContainer.js
+  const addExpenseHandler = (expenseFromNewExpenseContainer) => {
+    console.log(expenseFromNewExpenseContainer);
+  };
+
   return (
     <div>
       <h2>Let's get started!</h2>
+      <NewExpenseContainer onAddExpense={addExpenseHandler} />
       <ExpensesContainer expenses={expenses} />
     </div>
   );
