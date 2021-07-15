@@ -1,3 +1,4 @@
+import {useState} from "react";
 import ExpenseForm from "../expenseForm/ExpenseForm";
 import "./NewExpenseContainer.css";
 
@@ -13,12 +14,31 @@ const NewExpenseContainer = (props) => {
 
     // passing expenseData up to App.js component
     props.onAddExpense(expenseData);
+
+    setVisbile(false);
+  };
+
+  const [visible, setVisbile] = useState(false);
+
+  const showFormHandler = () => {
+    setVisbile(true);
+    console.log("clicked");
+  };
+
+  const hideFormHandler = () => {
+    setVisbile(false);
   };
 
   // setting up custom onSaveExpenseData attribute with the handler function saveExpenseDataHandler
   return (
     <div className="new-expense">
-      <ExpenseForm onSaveExpenseData={saveExpenseDataHandler} />
+      {!visible && <button onClick={showFormHandler}>Add New Expense</button>}
+      {visible && (
+        <ExpenseForm
+          onSaveExpenseData={saveExpenseDataHandler}
+          onHideForm={hideFormHandler}
+        />
+      )}
     </div>
   );
 };

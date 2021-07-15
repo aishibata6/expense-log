@@ -1,5 +1,5 @@
 import Card from "../../UI/Card";
-import ExpenseItem from "../expenseItem/ExpenseItem";
+import ExpensesList from "../expensesList/ExpensesList";
 import ExpensesFilter from "../expensesFilter/ExpensesFilter";
 import "./ExpensesContainer.css";
 
@@ -13,32 +13,17 @@ const ExpensesContainer = (props) => {
     setYear(enteredYear);
   };
 
+  const filteredExpenses = props.expenses.filter((expense) => {
+    return expense.date.getFullYear().toString() === year;
+  });
+
   console.log(year);
 
   return (
     <div>
       <Card className="expenses">
         <ExpensesFilter selected={year} onSelectedYear={selectedYearHandler} />
-        <ExpenseItem
-          expenseTitle={props.expenses[0].title}
-          expenseAmount={props.expenses[0].amount}
-          date={props.expenses[0].date}
-        />
-        <ExpenseItem
-          expenseTitle={props.expenses[1].title}
-          expenseAmount={props.expenses[1].amount}
-          date={props.expenses[1].date}
-        />
-        <ExpenseItem
-          expenseTitle={props.expenses[2].title}
-          expenseAmount={props.expenses[2].amount}
-          date={props.expenses[2].date}
-        />
-        <ExpenseItem
-          expenseTitle={props.expenses[3].title}
-          expenseAmount={props.expenses[3].amount}
-          date={props.expenses[3].date}
-        />
+        <ExpensesList items={filteredExpenses} />
       </Card>
     </div>
   );
